@@ -1,0 +1,160 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": ["typescript", "unicorn", "oxc", "promise"],
+	"categories": {
+		"correctness": "error",
+		"suspicious": "error",
+		"perf": "warn"
+	},
+	"rules": {
+		"typescript/consistent-type-assertions": [
+			"error",
+			{
+				"assertionStyle": "never"
+			}
+		],
+		"typescript/no-explicit-any": "error",
+		"typescript/no-non-null-assertion": "error",
+		"no-console": "off",
+		"no-await-in-loop": "off",
+		"promise/no-nesting": "off"
+	},
+	"ignorePatterns": [
+		"node_modules",
+		".build/**",
+		".wrangler/**",
+		"worker-runtime.d.ts",
+		"**/worker-configuration.d.ts",
+		"**/.svelte-kit/**",
+		"workers/*/*/build/**"
+	],
+	"overrides": [
+		{
+			"files": ["packages/laravel-runtime/**/*.ts"],
+			"rules": {
+				"no-restricted-imports": [
+					"error",
+					{
+						"patterns": [
+							{
+								"group": [
+									"**/workers/**",
+									"**/packages/**",
+									"@simplyalec/laravel-cf-workers-cloudflare-platform",
+									"@simplyalec/laravel-cf-workers-cloudflare-platform/*",
+									"**/cloudflare-platform/**",
+									"@simplyalec/laravel-cf-workers-release-tools",
+									"@simplyalec/laravel-cf-workers-release-tools/*",
+									"**/release-tools/**",
+									"@simplyalec/laravel-cf-workers-snipe-it-*"
+								],
+								"message": "laravel-runtime must use public package exports and cannot depend on application workers or cloudflare-platform, release-tools."
+							},
+							{
+								"group": [
+									"../**/laravel-runtime/**",
+									"../**/cloudflare-platform/**",
+									"../**/release-tools/**"
+								],
+								"message": "Use public package exports instead of relative cross-package imports."
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"files": ["packages/cloudflare-platform/**/*.ts"],
+			"rules": {
+				"no-restricted-imports": [
+					"error",
+					{
+						"patterns": [
+							{
+								"group": [
+									"**/workers/**",
+									"**/packages/**",
+									"@simplyalec/laravel-cf-workers-release-tools",
+									"@simplyalec/laravel-cf-workers-release-tools/*",
+									"**/release-tools/**",
+									"@simplyalec/laravel-cf-workers-snipe-it-*"
+								],
+								"message": "cloudflare-platform must use public package exports and cannot depend on application workers or release-tools."
+							},
+							{
+								"group": [
+									"../**/laravel-runtime/**",
+									"../**/cloudflare-platform/**",
+									"../**/release-tools/**"
+								],
+								"message": "Use public package exports instead of relative cross-package imports."
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"files": ["packages/release-tools/**/*.ts"],
+			"rules": {
+				"no-restricted-imports": [
+					"error",
+					{
+						"patterns": [
+							{
+								"group": [
+									"**/workers/**",
+									"**/packages/**",
+									"@simplyalec/laravel-cf-workers-cloudflare-platform",
+									"@simplyalec/laravel-cf-workers-cloudflare-platform/*",
+									"**/cloudflare-platform/**",
+									"@simplyalec/laravel-cf-workers-snipe-it-*"
+								],
+								"message": "release-tools must use public package exports and cannot depend on application workers or cloudflare-platform."
+							},
+							{
+								"group": [
+									"../**/laravel-runtime/**",
+									"../**/cloudflare-platform/**",
+									"../**/release-tools/**"
+								],
+								"message": "Use public package exports instead of relative cross-package imports."
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"files": ["workers/**/*.ts"],
+			"rules": {
+				"no-restricted-imports": [
+					"error",
+					{
+						"patterns": [
+							{
+								"group": ["**/packages/**"],
+								"message": "Use public package exports, including /testing, instead of package internals."
+							},
+							{
+								"group": [
+									"../**/laravel-runtime/**",
+									"../**/cloudflare-platform/**",
+									"../**/release-tools/**"
+								],
+								"message": "Use public package exports instead of relative cross-package imports."
+							},
+							{
+								"group": [
+									"@simplyalec/laravel-cf-workers-release-tools",
+									"@simplyalec/laravel-cf-workers-release-tools/*"
+								],
+								"message": "Release tools run at build time and cannot be imported into deployed Workers."
+							}
+						]
+					}
+				]
+			}
+		}
+	]
+}

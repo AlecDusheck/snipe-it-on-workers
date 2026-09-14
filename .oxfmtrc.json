@@ -1,0 +1,15 @@
+{
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"useTabs": true,
+	"printWidth": 110,
+	"ignorePatterns": [
+		"node_modules",
+		"package-lock.json",
+		".build/**",
+		".wrangler/**",
+		"worker-runtime.d.ts",
+		"**/worker-configuration.d.ts",
+		"**/.svelte-kit/**",
+		"workers/*/*/build/**"
+	]
+}

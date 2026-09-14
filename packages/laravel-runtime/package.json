@@ -1,0 +1,46 @@
+{
+	"name": "@simplyalec/laravel-cf-workers-laravel-runtime",
+	"version": "0.1.0",
+	"private": true,
+	"license": "MIT",
+	"type": "module",
+	"exports": {
+		"./application": "./src/application.ts",
+		"./bundle": "./src/bundle.ts",
+		"./emscripten": "./src/emscripten.ts",
+		"./corpus": "./src/corpus.ts",
+		"./crypto": "./src/crypto.ts",
+		"./entrypoint": "./src/entrypoint.ts",
+		"./environment": "./src/environment.ts",
+		"./executor": "./src/executor.ts",
+		"./files": "./src/files.ts",
+		"./queue": "./src/queue.ts",
+		"./release": "./src/release.ts",
+		"./schema": "./src/schema.ts",
+		"./stream": "./src/stream.ts",
+		"./types": "./src/types.ts",
+		"./validation": "./src/validation.ts",
+		"./testing": "./tests/harness.ts",
+		"./testing/driver": "./src/driver.ts",
+		"./interop": "./src/interop.d.ts",
+		"./corpus-index": "./src/corpus-index.ts"
+	},
+	"scripts": {
+		"typecheck": "tsc -p tsconfig.json",
+		"test": "pnpm test:unit",
+		"test:unit": "tsx --test tests/*.test.ts",
+		"test:integration": "tsx --test tests/integration/*.test.ts",
+		"test:benchmark": "tsx --test tests/benchmark/*.test.ts"
+	},
+	"dependencies": {
+		"@php-wasm/universal": "3.1.53",
+		"valibot": "1.5.0"
+	},
+	"devDependencies": {
+		"@types/node": "22.20.2",
+		"esbuild": "0.28.2",
+		"miniflare": "5.20260908.0-alpha",
+		"tsx": "4.23.13",
+		"typescript": "6.0.3"
+	}
+}

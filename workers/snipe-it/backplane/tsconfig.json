@@ -1,0 +1,14 @@
+{
+	"extends": "../../../tsconfig.base.json",
+	"compilerOptions": {
+		"types": [
+			"node",
+			"../../../worker-runtime.d.ts",
+			"./worker-configuration.d.ts",
+			"@simplyalec/laravel-cf-workers-laravel-runtime/interop"
+		],
+		"noUnusedLocals": true,
+		"noUnusedParameters": true
+	},
+	"include": ["src/**/*.ts", "tests/**/*.ts"]
+}

@@ -1,0 +1,30 @@
+{
+	"name": "@simplyalec/laravel-cf-workers-snipe-it-control-panel",
+	"private": true,
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"test": "pnpm --dir ../../.. exec tsx --test workers/snipe-it/control-panel/tests/*.test.ts",
+		"typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"dev": "../../../scripts/dev.sh panel"
+	},
+	"dependencies": {
+		"@simplyalec/laravel-cf-workers-cloudflare-platform": "workspace:*",
+		"@simplyalec/laravel-cf-workers-laravel-runtime": "workspace:*",
+		"valibot": "1.5.0"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-cloudflare": "7.2.9",
+		"@sveltejs/kit": "2.70.3",
+		"@sveltejs/vite-plugin-svelte": "7.3.0",
+		"@types/node": "22.20.2",
+		"esbuild": "0.28.2",
+		"miniflare": "5.20260908.0-alpha",
+		"svelte": "5.57.0",
+		"svelte-check": "4.7.6",
+		"tsx": "4.23.13",
+		"typescript": "6.0.3",
+		"vite": "8.2.2",
+		"wrangler": "4.130.0"
+	}
+}

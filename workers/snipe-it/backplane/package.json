@@ -1,0 +1,25 @@
+{
+	"name": "@simplyalec/laravel-cf-workers-snipe-it-backplane",
+	"private": true,
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"test": "pnpm --dir ../../.. exec tsx --test workers/snipe-it/backplane/tests/*.test.ts",
+		"test:integration": "pnpm --dir ../../.. exec tsx --test --test-concurrency=1 workers/snipe-it/backplane/tests/integration/*.test.ts",
+		"typecheck": "tsc -p tsconfig.json",
+		"test:benchmark": "pnpm --dir ../../.. exec tsx --test workers/snipe-it/backplane/tests/benchmark/*.test.ts",
+		"dev": "../../../scripts/dev.sh backplane"
+	},
+	"dependencies": {
+		"@simplyalec/laravel-cf-workers-cloudflare-platform": "workspace:*",
+		"@simplyalec/laravel-cf-workers-laravel-runtime": "workspace:*"
+	},
+	"devDependencies": {
+		"@types/node": "22.20.2",
+		"esbuild": "0.28.2",
+		"miniflare": "5.20260908.0-alpha",
+		"tsx": "4.23.13",
+		"typescript": "6.0.3",
+		"wrangler": "4.130.0"
+	}
+}

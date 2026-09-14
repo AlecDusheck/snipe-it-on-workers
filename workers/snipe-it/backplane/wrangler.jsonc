@@ -1,0 +1,97 @@
+{
+	"$schema": "../../../node_modules/wrangler/config-schema.json",
+	"name": "snipe-it-backplane",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-09-01",
+	"compatibility_flags": ["nodejs_compat"],
+	// The application profile embeds its PHP bootstrap overlay as text.
+	"rules": [{ "type": "Text", "globs": ["**/*.php"] }],
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": ["Tenant"],
+		},
+	],
+	"limits": {
+		"cpu_ms": 300000,
+	},
+	"observability": {
+		"enabled": true,
+	},
+	"workers_dev": false,
+	// Per environment: DIRECTORY ids come from `wrangler kv namespace create`; ASSETS serves releases/<name>/ to the runtime only.
+	"env": {
+		"development": {
+			"vars": {
+				"DEFAULT_RELEASE": "snipeit-8.7.2",
+				"SNIPEIT_ENV": {},
+				"TENANT_DEFAULTS": {},
+				"RUNTIME_LIMITS": {
+					"httpCpuMs": 60000,
+					"backgroundCpuMs": 60000,
+					"subRequests": 10000,
+				},
+			},
+			"durable_objects": {
+				"bindings": [
+					{
+						"name": "TENANTS",
+						"class_name": "Tenant",
+					},
+				],
+			},
+			"kv_namespaces": [
+				{
+					"binding": "DIRECTORY",
+					"id": "snipe-it-directory-development",
+				},
+			],
+			"worker_loaders": [
+				{
+					"binding": "LOADER",
+				},
+			],
+			"assets": {
+				"directory": "../../../.build/snipe-it/assets",
+				"binding": "ASSETS",
+				"run_worker_first": true,
+			},
+		},
+		"production": {
+			"vars": {
+				"DEFAULT_RELEASE": "snipeit-8.7.2",
+				"SNIPEIT_ENV": {},
+				"TENANT_DEFAULTS": {},
+				"RUNTIME_LIMITS": {
+					"httpCpuMs": 60000,
+					"backgroundCpuMs": 60000,
+					"subRequests": 10000,
+				},
+			},
+			"durable_objects": {
+				"bindings": [
+					{
+						"name": "TENANTS",
+						"class_name": "Tenant",
+					},
+				],
+			},
+			"kv_namespaces": [
+				{
+					"binding": "DIRECTORY",
+					"id": "snipe-it-directory-production",
+				},
+			],
+			"worker_loaders": [
+				{
+					"binding": "LOADER",
+				},
+			],
+			"assets": {
+				"directory": "../../../.build/snipe-it/assets",
+				"binding": "ASSETS",
+				"run_worker_first": true,
+			},
+		},
+	},
+}

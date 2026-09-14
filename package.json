@@ -1,0 +1,80 @@
+{
+	"name": "snipe-it-on-workers",
+	"version": "0.1.0",
+	"private": true,
+	"description": "Snipe-IT on Cloudflare Workers, powered by a modular Laravel PHP WebAssembly runtime",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AlecDusheck/snipe-it-on-workers.git"
+	},
+	"type": "module",
+	"scripts": {
+		"dev": "scripts/dev.sh",
+		"dev:standalone": "scripts/dev.sh standalone",
+		"build": "workers/snipe-it/scripts/build.sh",
+		"build:release": "workers/snipe-it/scripts/build-release.sh",
+		"types": "scripts/types.sh",
+		"typecheck": "pnpm types && pnpm -r typecheck",
+		"lint": "oxlint",
+		"fmt": "oxfmt",
+		"check": "pnpm typecheck && pnpm lint && oxfmt --check",
+		"test": "pnpm -r --filter \"./packages/*\" test && pnpm --filter @simplyalec/laravel-cf-workers-snipe-it-backplane test",
+		"test:integration": "pnpm --filter @simplyalec/laravel-cf-workers-snipe-it-backplane test:integration",
+		"test:panel": "pnpm --filter @simplyalec/laravel-cf-workers-snipe-it-control-panel test",
+		"benchmark": "pnpm --filter @simplyalec/laravel-cf-workers-laravel-runtime test:benchmark && pnpm --filter @simplyalec/laravel-cf-workers-snipe-it-backplane test:benchmark",
+		"prepare:fixture": "scripts/prepare-fixture.sh",
+		"dry-run": "scripts/dry-run.sh",
+		"verify": "pnpm check && pnpm test && pnpm prepare:fixture && pnpm --filter @simplyalec/laravel-cf-workers-laravel-runtime test:integration && pnpm build && pnpm test:integration && pnpm test:panel && pnpm dry-run",
+		"deploy": "pnpm build && wrangler deploy",
+		"deploy:backplane": "wrangler deploy --config workers/snipe-it/backplane/wrangler.jsonc --env production",
+		"deploy:panel": "pnpm build && wrangler deploy --config workers/snipe-it/control-panel/wrangler.jsonc --env production"
+	},
+	"devDependencies": {
+		"@php-wasm/universal": "3.1.53",
+		"@php-wasm/web-8-4": "3.1.53",
+		"@php-wasm/web-8-5": "3.1.53",
+		"@sveltejs/adapter-cloudflare": "7.2.9",
+		"@sveltejs/kit": "2.70.3",
+		"@sveltejs/vite-plugin-svelte": "7.3.0",
+		"@types/node": "22.20.2",
+		"esbuild": "0.28.2",
+		"miniflare": "5.20260908.0-alpha",
+		"mrmime": "2.0.1",
+		"oxfmt": "0.67.0",
+		"oxlint": "1.82.0",
+		"svelte": "5.57.0",
+		"svelte-check": "4.7.6",
+		"tsx": "4.23.13",
+		"typescript": "6.0.3",
+		"valibot": "1.5.0",
+		"vite": "8.2.2",
+		"wrangler": "4.130.0"
+	},
+	"engines": {
+		"node": ">=22"
+	},
+	"packageManager": "pnpm@10.29.3",
+	"cloudflare": {
+		"label": "Snipe-IT",
+		"products": [
+			"Workers",
+			"Durable Objects"
+		],
+		"categories": [
+			"storage"
+		],
+		"docs_url": "https://snipe-it.readme.io/docs",
+		"bindings": {
+			"DEFAULT_RELEASE": {
+				"description": "The release to run, for example snipeit-8.7.2. Releases ship with the Worker."
+			},
+			"APP_URL": {
+				"description": "Leave empty to use your Worker URL. Set the full origin when adding a custom domain."
+			},
+			"SNIPEIT_ENV": {
+				"description": "Snipe-IT environment settings as a JSON object. No administrator credentials are required; use Snipe-IT’s setup wizard."
+			}
+		}
+	}
+}

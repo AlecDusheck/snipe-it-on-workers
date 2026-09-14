@@ -1,0 +1,13 @@
+packages:
+  - packages/*
+  - workers/*/*
+
+# The pinned toolchain's platform packages require their installation hooks.
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - workerd
+
+overrides:
+  sharp: 0.35.4
+  "@sveltejs/kit>cookie": 0.7.2

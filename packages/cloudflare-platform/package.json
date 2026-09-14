@@ -1,0 +1,38 @@
+{
+	"name": "@simplyalec/laravel-cf-workers-cloudflare-platform",
+	"version": "0.1.0",
+	"private": true,
+	"license": "MIT",
+	"type": "module",
+	"exports": {
+		"./blocks": "./src/blocks.ts",
+		"./control": "./src/control.ts",
+		"./database": "./src/database.ts",
+		"./dynamic": "./src/dynamic.ts",
+		"./http": "./src/http.ts",
+		"./policy": "./src/policy.ts",
+		"./releases": "./src/releases.ts",
+		"./router": "./src/router.ts",
+		"./standalone": "./src/standalone.ts",
+		"./tenant": "./src/tenant.ts",
+		"./types": "./src/types.ts",
+		"./validation": "./src/validation.ts",
+		"./testing": "./tests/support.ts"
+	},
+	"scripts": {
+		"typecheck": "tsc -p tsconfig.json",
+		"test": "tsx --test tests/*.test.ts"
+	},
+	"dependencies": {
+		"@simplyalec/laravel-cf-workers-laravel-runtime": "workspace:*",
+		"mrmime": "2.0.1",
+		"valibot": "1.5.0"
+	},
+	"devDependencies": {
+		"@types/node": "22.20.2",
+		"esbuild": "0.28.2",
+		"miniflare": "5.20260908.0-alpha",
+		"tsx": "4.23.13",
+		"typescript": "6.0.3"
+	}
+}

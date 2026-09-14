@@ -1,0 +1,23 @@
+{
+	"name": "@simplyalec/laravel-cf-workers-release-tools",
+	"version": "0.1.0",
+	"private": true,
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"typecheck": "tsc -p tsconfig.json",
+		"test": "tsx --test tests/*.test.ts"
+	},
+	"dependencies": {
+		"@php-wasm/web-8-4": "3.1.53",
+		"@php-wasm/web-8-5": "3.1.53",
+		"@simplyalec/laravel-cf-workers-laravel-runtime": "workspace:*",
+		"esbuild": "0.28.2",
+		"valibot": "1.5.0"
+	},
+	"devDependencies": {
+		"@types/node": "22.20.2",
+		"tsx": "4.23.13",
+		"typescript": "6.0.3"
+	}
+}

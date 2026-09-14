@@ -1,0 +1,18 @@
+{
+	"name": "snipeit-8.7.1",
+	"application": {
+		"repository": "https://github.com/grokability/snipe-it.git",
+		"tag": "v8.7.1",
+		"commit": "d1e89f748be051d72526e2316d76b382e91aef39"
+	},
+	"php": {
+		"version": "8.4.25",
+		"package": "@php-wasm/web-8-4",
+		"packageVersion": "3.1.53",
+		"wasm": "8_4_25/php_8_4.wasm",
+		"loader": "php_8_4.js",
+		"sha256": "88e14ad0b66c7ea6860cab6ecbf24ca32a25967be96af56c2bdd17e62be4fe1c",
+		"loaderSha256": "c1d2d468679e81fe00f1501d07943e151cd783364d0b28109dd364c156bcffe4",
+		"mode": "jspi"
+	}
+}

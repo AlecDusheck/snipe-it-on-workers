@@ -1,0 +1,13 @@
+{
+	"name": "fixture",
+	"php": {
+		"version": "8.5.10",
+		"package": "@php-wasm/web-8-5",
+		"packageVersion": "3.1.53",
+		"wasm": "8_5_10/php_8_5.wasm",
+		"loader": "php_8_5.js",
+		"sha256": "b88e689a6350ab4cd11ef077f3bebbe8c422d72f7d4f2b3ff56133b16f8d2e39",
+		"loaderSha256": "b85af9a70cb002224789b05d9f71aca68df49e6cbeb6023c13cafd5a99f7a862",
+		"mode": "jspi"
+	}
+}

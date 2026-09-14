@@ -1,0 +1,42 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "snipe-it",
+	"main": ".build/snipe-it/standalone/worker.mjs",
+	"no_bundle": true,
+	"compatibility_date": "2026-09-01",
+	"compatibility_flags": ["nodejs_compat"],
+	// Built releases: releases/<name>/... served to the runtime; public files answered before the Worker runs.
+	"assets": {
+		"directory": ".build/snipe-it/assets",
+		"binding": "ASSETS",
+		"run_worker_first": true,
+	},
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "SNIPEIT",
+				"class_name": "SnipeIT",
+			},
+		],
+	},
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": ["SnipeIT"],
+		},
+	],
+
+	"vars": {
+		"DEFAULT_RELEASE": "snipeit-8.7.2",
+		"APP_URL": "",
+		"SNIPEIT_ENV": {},
+		"TENANT_DEFAULTS": {},
+	},
+	"limits": {
+		"cpu_ms": 300000,
+	},
+	"observability": {
+		"enabled": true,
+	},
+	"workers_dev": true,
+}

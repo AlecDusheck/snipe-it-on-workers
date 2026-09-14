@@ -1,0 +1,22 @@
+{
+	"name": "laravel-cloudflare/runtime-contract",
+	"type": "project",
+	"license": "MIT",
+	"require": {
+		"php": "^8.4",
+		"laravel/framework": "^12.0"
+	},
+	"extra": {
+		"laravel": {
+			"dont-discover": [
+				"*"
+			]
+		}
+	},
+	"config": {
+		"sort-packages": true,
+		"platform": {
+			"php": "8.4.25"
+		}
+	}
+}
